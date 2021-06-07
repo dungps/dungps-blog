@@ -1,15 +1,20 @@
-import React from "react"
-import BlogProvider, { BlogContext } from "../../modules/blog"
+import React, { Fragment, useContext, useEffect } from "react"
+import { Spinner } from "../../components"
+import { AppContext } from "../../context"
 
 const Blog = () => {
+    const context = useContext(AppContext)
+
+    useEffect(() => {
+        context.blog.init()
+    })
+
+    if (context.blog.isLoading) {
+        return <Spinner />
+    }
+
     return (
-        <BlogProvider>
-            <BlogContext.Consumer>
-                {context => {
-                    return <h1>Blog</h1>
-                }}
-            </BlogContext.Consumer>
-        </BlogProvider>
+        <h1>Blog</h1>
     )
 }
 

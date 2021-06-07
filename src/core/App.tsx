@@ -1,6 +1,6 @@
 import { History } from "history"
 import AppRouter from "../routers/AppRouter"
-import { BootstrapContext } from "../modules/bootstrap"
+import { AppConsumer } from "../context"
 import { Spinner } from "../components"
 
 interface Props {
@@ -9,9 +9,9 @@ interface Props {
 
 const App = ({ history }: Props) => {
     return (
-        <BootstrapContext.Consumer>
+        <AppConsumer>
             {context => {
-                return context.loading ? <Spinner style={{
+                return context.bootstrap.loading ? <Spinner style={{
                     height: "100vh",
                     width: "100%",
                     display: "flex",
@@ -19,7 +19,7 @@ const App = ({ history }: Props) => {
                     alignItems: "center"
                 }} /> : <AppRouter history={history} />
             }}
-        </BootstrapContext.Consumer>
+        </AppConsumer>
     )
 }
 

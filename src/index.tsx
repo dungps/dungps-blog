@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './core/Root';
 import reportWebVitals from './reportWebVitals';
+import "./assets/scss/app.scss"
 import { createBrowserHistory } from "history"
 
 const history = createBrowserHistory()

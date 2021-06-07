@@ -1,6 +1,6 @@
 import React from 'react'
 import { History } from "history"
-import BootstrapProvider from '../modules/bootstrap'
+import { AppProvider } from "../context"
 import App from "./App"
 
 interface Props {
@@ -9,9 +9,9 @@ interface Props {
 
 const Root = ({ history }: Props) => {
     return (
-        <BootstrapProvider>
+        <AppProvider>
             <App history={history} />
-        </BootstrapProvider>
+        </AppProvider>
     )
 }
 
