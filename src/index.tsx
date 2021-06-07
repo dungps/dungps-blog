@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import Root from './core/Root';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserHistory } from "history"
+
+const history = createBrowserHistory()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Root history={history} />
   </React.StrictMode>,
   document.getElementById('root')
 );
