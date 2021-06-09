@@ -1,1 +1,0 @@
-export { default as BlogComponent } from "./Blog"

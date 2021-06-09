@@ -1,20 +1,25 @@
-import React, {useEffect, Fragment} from "react"
-import imgBg from "../../assets/img/img_parallax.jpeg"
-import style from "./style.module.scss"
+import React from 'react';
+import logo from 'assets/img/logo.svg'
 
 const Home = () => {
-	useEffect(() => {
-		document.body.style.overflow = "hidden"
-	})
+    return (
+        <div className='App'>
+            <header className='App-header'>
+                <img src={logo} className='App-logo' alt='logo' />
+                <p>
+                    Edit <code>src/views/Home/Home.tsx</code> and save to reload.
+                </p>
+                <a
+                    className='App-link'
+                    href='https://reactjs.org'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    Learn React
+                </a>
+            </header>
+        </div>
+    );
+};
 
-	return (
-		<Fragment>
-			<div className={style.bgImg}>
-				<img className={style.img} src={imgBg} alt="home-img"/>
-			</div>
-			<div className={style.bgOverlay} />
-		</Fragment>
-	)
-}
-
-export default Home
+export default Home;
