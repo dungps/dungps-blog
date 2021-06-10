@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routers from './router';
 import { IRoute } from '../types/Route';
 import AppRoute from './Route';
+import { Page404Component } from 'views';
 
 const AppRouter = () => {
     return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
 
                     return <AppRoute key={key} {...rest} layout={Layout} />;
                 })}
+                <Route component={(routeProps: any) => <Page404Component {...routeProps} />} />
             </Switch>
         </Router>
     );

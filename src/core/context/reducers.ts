@@ -4,19 +4,19 @@ import { defaultContext } from './context';
 
 const combineReducer = (options: any): (state: AppContextState, action: ActionData<any>) => AppContextState => {
     return (state: AppContextState = defaultContext(), action: ActionData<any>): AppContextState => {
-        const newState = Object.assign({}, state)
+        const newState = Object.assign({}, state);
         for (const key of Object.keys(options)) {
             if (newState[key as AppReducers]) {
-                newState[key as AppReducers] = options[key](newState[key as AppReducers], action)
+                newState[key as AppReducers] = options[key](newState[key as AppReducers], action);
             }
         }
-        
-        return newState
-    }
-}
+
+        return newState;
+    };
+};
 
 const reducers = combineReducer({
-    [AppReducers.BOOTSTRAP]: bootstrapReducer
-})
+    [AppReducers.BOOTSTRAP]: bootstrapReducer,
+});
 
-export default reducers
+export default reducers;

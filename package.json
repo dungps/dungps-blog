@@ -3,16 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
+    "@types/marked": "^2.0.3",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router": "^5.1.15",
     "@types/react-router-dom": "^5.1.7",
     "axios": "^0.21.1",
+    "bootstrap": "^4.4.1",
+    "marked": "^2.0.7",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,6 +30,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "serve": "vercel dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@vercel/node": "^1.11.0",
     "prettier": "^2.3.1"
   }
 }

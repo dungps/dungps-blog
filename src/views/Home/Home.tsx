@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from 'assets/img/logo.svg'
 
-const Home = () => {
+const HomeComponent = () => {
     return (
         <div className='App'>
             <header className='App-header'>
@@ -22,4 +22,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomeComponent;

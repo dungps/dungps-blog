@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 import Provider from './context/provider';
 import App from './App';
 
@@ -7,7 +7,7 @@ const Root = () => {
         <Provider>
             <App />
         </Provider>
-    )
-}
+    );
+};
 
-export default Root
+export default Root;

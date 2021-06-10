@@ -1,16 +1,17 @@
-import { createContext } from "react"
-import { bootstrapDefaultState } from "modules/bootstrap/reducer"
+import { createContext } from 'react';
+import { bootstrapDefaultState } from 'modules/bootstrap/reducer';
 import { AppContextState, AppReducers, DispatchAction } from './types';
 
 export const defaultContext = () => {
     return {
-        [AppReducers.BOOTSTRAP]: bootstrapDefaultState
-    }
-}
+        [AppReducers.BOOTSTRAP]: bootstrapDefaultState,
+    };
+};
 
-export const AppContext = createContext<{state: AppContextState, dispatch: DispatchAction<any>}>({
+export const AppContext = createContext<{ state: AppContextState, dispatch: DispatchAction<any> }>({
     state: defaultContext(),
-    dispatch: () => {}
-})
+    dispatch: () => {
+    },
+});
 
-export const AppConsumer = AppContext.Consumer
+export const AppConsumer = AppContext.Consumer;
