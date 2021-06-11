@@ -1,6 +1,7 @@
 import { ActionData, AppContextState, AppReducers } from './types';
 import { bootstrapReducer } from 'modules/bootstrap/reducer';
 import { defaultContext } from './context';
+import { errorReducer } from '../../modules/error/reducer';
 
 const combineReducer = (options: any): (state: AppContextState, action: ActionData<any>) => AppContextState => {
     return (state: AppContextState = defaultContext(), action: ActionData<any>): AppContextState => {
@@ -17,6 +18,7 @@ const combineReducer = (options: any): (state: AppContextState, action: ActionDa
 
 const reducers = combineReducer({
     [AppReducers.BOOTSTRAP]: bootstrapReducer,
+    [AppReducers.ERROR]: errorReducer,
 });
 
 export default reducers;

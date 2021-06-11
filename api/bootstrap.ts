@@ -1,7 +1,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import githubHttpClient from '../src/utils/request/GithubHttpClient';
 
-const { GITHUB_OWNER = 'dungps', GITHUB_REPO = 'dungps-post' } = process.env;
+const { GITHUB_OWNER = '', GITHUB_REPO = '' } = process.env;
 
 interface Response {
     content: string

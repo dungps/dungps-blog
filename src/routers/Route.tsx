@@ -1,8 +1,18 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { IRoute } from 'types/Route';
+import { Page404Component } from '../views';
+import { Helmet } from 'react-helmet';
 
-const AppRoute = ({ component: Component, layout: Layout, redirect, ...rest }: IRoute) => {
+const getHelmetTitle = (title: string | Function, appRoute: any) => {
+    if (typeof title === 'function') {
+        return title(appRoute)
+    }
+
+    return title
+}
+
+const AppRoute = ({ component: Component, layout: Layout, redirect, helmet, ...rest }: IRoute) => {
     return (
         <Route
             {...rest}
@@ -13,17 +23,30 @@ const AppRoute = ({ component: Component, layout: Layout, redirect, ...rest }: I
 
                 if (Layout && Component) {
                     return (
-                        <Layout {...appRoute}>
-                            <Component {...appRoute} />
-                        </Layout>
+                        <>
+                            {helmet ? <Helmet title={getHelmetTitle(helmet.title, appRoute)} /> : null}
+                            <Layout {...appRoute} {...rest} >
+                                <Component {...appRoute} {...rest} />
+                            </Layout>
+                        </>
                     );
                 }
 
                 if (Component) {
-                    return <Component {...appRoute} />;
+                    return (
+                        <>
+                            {helmet ? <Helmet title={getHelmetTitle(helmet.title, appRoute)} /> : null}
+                            <Component {...appRoute} {...rest} />
+                        </>
+                    );
                 }
 
-                return <h1>Missing component</h1>;
+                return (
+                    <>
+                        {helmet ? <Helmet title={getHelmetTitle(helmet.title, appRoute)} /> : null}
+                        <Page404Component {...appRoute} />
+                    </>
+                );
             }}
         />
     );

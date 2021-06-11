@@ -1,7 +1,8 @@
 import { defaultContext } from './context';
 
 export enum AppReducers {
-    BOOTSTRAP = 'bootstrap'
+    BOOTSTRAP = 'bootstrap',
+    ERROR = 'error'
 }
 
 export type AppContextState = ReturnType<typeof defaultContext>

@@ -12,7 +12,7 @@ export const bootstrapReducer = (state: BootstrapState = bootstrapDefaultState, 
             state.loading = false;
             break;
         case Actions.LOAD_BOOTSTRAP:
-            state.data = action.payload;
+            state.data = { ...state.data, ...action.payload };
             break;
     }
 

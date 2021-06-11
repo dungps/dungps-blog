@@ -11,11 +11,13 @@ const defaultHeaders = {
 
 abstract class HttpClient {
     protected readonly instance: AxiosInstance;
+    protected readonly showConsole: boolean;
 
     public constructor(
         baseURL: string,
         headers = {},
         options?: AxiosRequestConfig,
+        showConsole: boolean = true,
     ) {
         this.instance = axios.create({
             baseURL,
@@ -26,7 +28,12 @@ abstract class HttpClient {
             timeout: 10000,
             ...options,
         });
-
+        this.showConsole = showConsole;
+        this.initializeResponseInterceptor = this.initializeResponseInterceptor.bind(this);
+        this.requestOnFulfilled = this.requestOnFulfilled.bind(this);
+        this.requestOnRejected = this.requestOnRejected.bind(this);
+        this.responseOnFulfilled = this.responseOnFulfilled.bind(this);
+        this.responseOnRejected = this.responseOnRejected.bind(this);
         this.initializeResponseInterceptor();
     }
 
@@ -59,12 +66,7 @@ abstract class HttpClient {
     private initializeResponseInterceptor() {
         this.instance.interceptors.request.use(
             this.requestOnFulfilled,
-            (error) => {
-                if (process.env.NODE_ENV === 'development') {
-                    console.log('axios.request.error', error);
-                }
-                return Promise.reject(error);
-            },
+            this.requestOnRejected,
         );
 
         this.instance.interceptors.response.use(
@@ -75,14 +77,14 @@ abstract class HttpClient {
 
     protected requestOnFulfilled(config: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> {
         if (!HttpClient.isProduction()) {
-            console.log('axios.request', config.method, config.url, config, config.baseURL);
+            if (this.showConsole) console.log('axios.request', config.method, config.url, config, config.baseURL);
         }
         return config;
     }
 
     protected requestOnRejected(err: any): any {
         if (!HttpClient.isProduction()) {
-            console.log('axios.request.error', err);
+            if (this.showConsole) console.log('axios.request.error', err);
         }
         return Promise.reject(err);
     }
@@ -90,14 +92,14 @@ abstract class HttpClient {
     protected responseOnFulfilled(response: AxiosResponse): AxiosResponse | Promise<AxiosResponse> {
         if (!HttpClient.isProduction()) {
             const { config } = response;
-            console.log('axios.response', config.method, config.url, config, config.baseURL);
+            if (this.showConsole) console.log('axios.response', config.method, config.url, config, config.baseURL);
         }
         return response;
     }
 
     protected responseOnRejected(err: any): any {
         if (!HttpClient.isProduction()) {
-            console.log('axios.response.error', err);
+            if (this.showConsole) console.log('axios.response.error', err);
         }
         return Promise.reject(err);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { getPosts } from 'modules/blog/api';
-import { Pagination, Post } from 'models/Post';
+import { Post } from 'models/Post';
 import { PageHeader, Spinner } from '../../components';
 import Item from './components/Item';
 import bg from 'assets/img/shape.svg';
@@ -21,18 +21,14 @@ const BlogComponent = ({ match, history }: RouteComponentProps<{ category?: stri
     useEffect(() => {
         async function run() {
             if (loading) {
-                try {
-                    const result = await getPosts({
-                        category,
-                        tag,
-                        limit: 10,
-                        page,
-                    });
-                    setPosts(result.data as Array<Post>);
-                    setCanLoadMore(page < (result.pagination?.total_page || 0));
-                } catch (e) {
-                    history.push('/404')
-                }
+                const result = await getPosts({
+                    category,
+                    tag,
+                    limit: 10,
+                    page,
+                });
+                setPosts(result.data as Array<Post>);
+                setCanLoadMore(page < (result.pagination?.total_page || 0));
                 setLoading(false);
             }
         }
@@ -55,15 +51,27 @@ const BlogComponent = ({ match, history }: RouteComponentProps<{ category?: stri
                 setPosts([...posts, ...(result.data as Array<Post>)]);
                 setCanLoadMore(currentPage + 1 < (result.pagination?.total_page || 0));
             } catch (err) {
-                setCanLoadMore(false)
+                setCanLoadMore(false);
             }
             setLoadMore(false);
         }
     };
 
+    const getTitle = () => {
+        if (category) {
+            return `Category: ${category}`;
+        }
+
+        if (tag) {
+            return `Tags: ${tag}`;
+        }
+
+        return 'Blog';
+    };
+
     return (
         <>
-            <PageHeader title='Blog' wrapperStyle={{
+            <PageHeader title={getTitle()} wrapperStyle={{
                 background: `url(${bg}) no-repeat center -80px`,
                 backgroundSize: 1840,
             }} />
@@ -73,7 +81,7 @@ const BlogComponent = ({ match, history }: RouteComponentProps<{ category?: stri
                         <div className='d-flex justify-content-center align-items-center mb-8'>
                             <Spinner type='DotLoader' />
                         </div>
-                    ) : (
+                    ) : posts.length ? (
                         <>
                             <div className='row'>
                                 {posts.map((post, k) => <Item post={post} key={k} />)}
@@ -89,6 +97,12 @@ const BlogComponent = ({ match, history }: RouteComponentProps<{ category?: stri
                                 </div>
                             ) : null}
                         </>
+                    ) : (
+                        <div className='row'>
+                            <div className='col-md-12'>
+                                <h3>No post found.</h3>
+                            </div>
+                        </div>
                     )}
                 </div>
             </section>

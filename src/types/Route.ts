@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react';
 
 export interface IRoute {
+    [key: string]: any
+
     path: string
     component?: React.ElementType
     redirect?: string
@@ -8,4 +10,7 @@ export interface IRoute {
     isPublicRoute?: boolean
     layout?: React.ElementType
     children?: Array<IRoute>
+    helmet?: {
+        title: string | Function
+    }
 }

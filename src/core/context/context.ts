@@ -1,10 +1,12 @@
 import { createContext } from 'react';
 import { bootstrapDefaultState } from 'modules/bootstrap/reducer';
 import { AppContextState, AppReducers, DispatchAction } from './types';
+import { errorDefaultState } from '../../modules/error/reducer';
 
 export const defaultContext = () => {
     return {
         [AppReducers.BOOTSTRAP]: bootstrapDefaultState,
+        [AppReducers.ERROR]: errorDefaultState,
     };
 };
 

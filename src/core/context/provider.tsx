@@ -2,9 +2,12 @@ import React, { PropsWithChildren, useEffect, useReducer } from 'react';
 import reducers from './reducers';
 import { AppContext, defaultContext } from './context';
 import bootstrapRunner from 'modules/bootstrap/runner';
+import localHttpClient from '../../utils/request/LocalHttpClient';
 
 const Provider = ({ children }: PropsWithChildren<any>) => {
     const [state, dispatch] = useReducer(reducers, defaultContext(), (state) => state)
+
+    localHttpClient.setDispatch(dispatch)
 
     useEffect(() => {
         const runner = async () => {
@@ -12,7 +15,8 @@ const Provider = ({ children }: PropsWithChildren<any>) => {
         }
 
         runner()
-    }, [state])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <AppContext.Provider value={{state, dispatch}}>
