@@ -1,8 +1,11 @@
-import React from "react";
+import Bootstrap from '../../models/Bootstrap';
 
-interface BootstrapContextState {
-    loading: boolean
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+export enum Actions {
+    LOADING_DONE = '@bootstrap/loading_done',
+    LOAD_BOOTSTRAP = '@bootstrap/load'
 }
 
-export default BootstrapContextState
+export interface BootstrapState {
+    loading: boolean,
+    data: Bootstrap
+}

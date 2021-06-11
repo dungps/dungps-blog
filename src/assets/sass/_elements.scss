@@ -1,0 +1,131 @@
+.bg-pattern {
+	position: absolute;
+	background-blend-mode: overlay;
+	background-image: url(../img/bg-page-section.png);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-size: 450px;
+	opacity: 0.4;
+}
+.flicker {
+	animation-name: example;
+	animation-duration: 0.95s;
+	animation-iteration-count: infinite;
+	animation-fill-mode: ease;
+}
+@keyframes example {
+	0% {
+		background-color: #2c7be5;
+		box-shadow: 0px 0px 0px 0px rgba(44, 113, 229, 1),
+			0 6px 17px 0 rgba(44, 113, 229, 0.19);
+	}
+	98% {
+		background-color: #2c7be5;
+		box-shadow: 0px 0px 0px 8px rgba(44, 113, 229, 0.2),
+			0 6px 17px 12px rgba(44, 113, 229, 0.4);
+	}
+	100% {
+		background-color: #2c7be5;
+		box-shadow: 0px 0px 0px 6px rgba(44, 113, 229, 0.2),
+			0 6px 17px 14px rgba(44, 113, 229, 0.4);
+	}
+}
+.fw-slick-carousel-wrapper .slick-slide {
+	outline: none;
+}
+
+.fw-slick-nav .slick-slide {
+	cursor: pointer;
+}
+
+.fw-slick-nav .slick-current .avatar-title {
+	background-color: #2c7be5 !important;
+}
+
+.fw-slick-nav .slick-current h3,
+.fw-slick-nav .slick-current .icon {
+	color: #2c7be5 !important;
+}
+
+.fw-slick-nav .slick-current .text-gray-700 {
+	color: #152e4d !important;
+}
+
+.fw-slick-carousel .slick-list {
+	overflow: visible;
+}
+.devider {
+	height: 1px;
+	margin-right: 1.375rem;
+	background-color: rgba(52, 58, 64, 0.2);
+}
+
+.video-popup {
+	position: relative;
+}
+
+.play-button {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	background-color: rgba(0,0,0,.4);
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.3);
+	border: solid 3px #fff;
+	border-radius: 50%;
+	top: 50%;
+	color: #fff;
+	left: 50%;
+	cursor: pointer;
+	z-index: 100;
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	line-height: 72px;
+	padding-left: 2px;
+	text-align: center;
+	transition: background-color .15s ease-in;
+}
+
+.play-button:hover {
+	background-color: rgba(0,0,0,.7);
+}
+
+.flickity-button-white .flickity-button {
+	color: $dark;
+}
+
+.carousel-nav {
+	img {
+		opacity: 0.3;
+		cursor: pointer;
+	}
+
+	.is-selected img {
+		opacity: 1;
+	}
+}
+.guide{
+.guide-navbar{
+	@include media-breakpoint-down(lg) {
+
+	.list-guide{
+		padding:4rem;
+		}
+	}
+	@include media-breakpoint-up(lg) {
+		width: 20rem;
+	padding:4rem 0 ;
+	margin-left: auto;
+	.list-guide{
+		overflow-y: scroll;
+		height: 65vh !important;
+		width: 300px !important;
+		}
+	}
+}
+	.sticky-right{
+		transform: translate(0);
+		left: unset !important;
+	}
+}

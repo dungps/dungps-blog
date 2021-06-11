@@ -1,57 +1,25 @@
-export interface IPost {
-    object: string
-    id: string
-    created_at: string
-    last_edited_time: string
-    archived: boolean,
-    parent: {
-        type: string,
-        database_id: string
-    },
-    properties: NodeJS.Dict<IProperty>
+export interface Post {
+    title: string
+    slug: string
+    category: string
+    tags: Array<string>
+    feature_image: string
+    content?: string
+    link: string
 }
 
-interface IAnnotation {
-    bold: boolean
-    italic: boolean
-    strikethrough: boolean
-    underline: boolean
-    code: boolean
-    color: string
+export interface Pagination {
+    page: number
+    limit: number
+    total_items: number
+    total_page: number
 }
 
-export interface IText {
-    type: string,
-    text: {
-        content: string,
-        link: string | null
-    },
-    annotations: IAnnotation
-    plain_text: string | null
-    href: string | null
-}
-
-export interface IProperty {
-    id: string
-    type: string
-    select?: {
-        name: string
-        color: string
-    }
-    phone_number: string
-    email?: string
-    number?: number
-    rich_text?: Array<IText> | string
-    title?: Array<IText>
-    multi_select?: Array<{
-        name: string
-        color: string
-    }>
-    created_time?: string
-    url?: string
-    files?: Array<{
-        name: string
-    }>
-    last_edited_time?: string
-
+export interface PostQuery {
+    slug?: string
+    category?: string
+    tag?: string
+    limit?: number
+    page?: number
+    s?: string
 }

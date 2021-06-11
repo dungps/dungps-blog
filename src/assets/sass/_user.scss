@@ -1,0 +1,529 @@
+//== WordPress
+//
+//##
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.wp-caption {
+	max-width: 100%;
+	height: auto;
+	border: 1px solid $gray-200;
+	padding: 4px;
+	margin-bottom: $spacer;
+
+	.wp-caption-text {
+		text-align: center;
+		padding: 4px 4px 0;
+		font-size: $font-size-sm;
+		color: $gray-500;
+	}
+}
+
+.alignleft {
+	float: left;
+	margin-right: $spacer;
+}
+
+.alignright {
+	float: right;
+	margin-left: $spacer;
+}
+
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.screen-reader-text {
+	@extend .sr-only;
+}
+
+.gallery {
+	@extend .clearfix;
+	margin: 0 -5px;
+
+	.gallery-item {
+		padding: 0 5px;
+		float: left;
+		position: relative;
+	}
+
+	&.gallery-columns-1 .gallery-item { width: 100%/1 }
+	&.gallery-columns-2 .gallery-item { width: 100%/2 }
+	&.gallery-columns-3 .gallery-item { width: 100%/3 }
+	&.gallery-columns-4 .gallery-item { width: 100%/4 }
+	&.gallery-columns-5 .gallery-item { width: 100%/5 }
+	&.gallery-columns-6 .gallery-item { width: 100%/6 }
+	&.gallery-columns-7 .gallery-item { width: 100%/7 }
+	&.gallery-columns-8 .gallery-item { width: 100%/8 }
+	&.gallery-columns-9 .gallery-item { width: 100%/9 }
+
+	img {
+		width: 100%;
+		height: auto;
+		margin-bottom: 10px;
+	}
+
+	.gallery-caption {
+		position: absolute;
+		bottom: 0;
+		text-align: center;
+		padding: 5px;
+		font-size: $font-size-sm;
+		background: rgba(0,0,0,.5);
+		color: #fff;
+		bottom: 10px;
+		left: 5px;
+		right: 5px;
+	}
+}
+
+//
+// user.scss
+// Use this to write your custom SCSS
+//
+
+.site {
+	min-height: 100vh;
+}
+
+.navbar-brand {
+	padding-top: 0;
+	padding-bottom: 0.3rem;
+}
+
+.main-content {
+	flex: 1;
+}
+
+.site-footer {
+	.small {
+		font-size: 14px;
+	}
+
+	.menu {
+		padding: 0;
+		margin-top: 1rem;
+		font-size: 14px;
+
+		li {
+			margin-top: .5rem;
+			list-style: none;
+		}
+
+		a {
+			color: $white;
+		}
+
+		a:hover,
+		a:active {
+			color: lighten( $white, 30% );
+		}
+	}
+}
+
+// .comments .comment .children {
+// 	margin-top: 1.5rem;
+// 	list-style: none;
+// 	padding-left: 0;
+// }
+
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.nav-links .page-numbers {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	user-select: none;
+	border: 1px solid $primary;
+	padding: .4375rem .75rem;
+	min-width: 40px;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .3125rem;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	color: $primary;
+	background-color: #fff;
+	text-decoration: none !important;
+}
+
+.nav-links .page-numbers {
+	&.next,
+	&.prev {
+		font-size: 2rem;
+		height: 40px;
+		line-height: 34px;
+		padding: 0;
+	}
+}
+
+@include media-breakpoint-down(xs) {
+  .nav-links a.page-numbers:not(.prev):not(.next) {
+		display: none;
+	}
+}
+
+.nav-links .page-numbers.current,
+.nav-links .page-numbers:hover {
+	border-color: $primary !important;
+	background-color: $primary !important;
+	color: #fff !important;
+}
+
+.pagination .nav-links {
+	width: 100%;
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.wpforms-field-large,
+.wpforms-field-medium {
+	display: block;
+	width: 100%;
+	height: calc(1.6em + 1.625rem + 2px);
+	padding: 0.8125rem 1.25rem;
+	font-size: 1.0625rem;
+	font-weight: 400;
+	line-height: 1.6;
+	color: #161C2D;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #D9E2EF;
+	border-radius: 0.375rem;
+	box-shadow: none;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.wpforms-field-large:focus,
+.wpforms-field-medium:focus {
+	color: #161C2D;
+	background-color: #fff;
+	border-color: #9ec2f3;
+	outline: 0;
+	box-shadow: none, none;
+}
+
+textarea.wpforms-field-large,
+textarea.wpforms-field-medium {
+	height: auto;
+	min-height: 120px;
+}
+
+.form-group label.wpforms-error {
+	margin: 6px 0 0;
+	font-size: 14px;
+	color: #DF4759 !important;
+}
+
+.wpforms-valid {
+	border-color: #42BA96 !important;
+}
+
+input.wpforms-error,
+textarea.wpforms-error {
+	border-color: #DF4759 !important;
+}
+
+.wpforms-confirmation-container {
+  word-break: break-word;
+  text-align: center;
+	color: #42BA96;
+	background-color: #e5f4e9;
+	border-color: #b2dfbc;
+	position: relative;
+	padding: .75rem 1.25rem;
+	margin-bottom: 1rem;
+	border: 1px solid transparent;
+	border-radius: .3125rem;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	display: block;
+	margin: 0;
+	width: 100%;
+	background: transparent;
+}
+
+input[type=range]::-webkit-slider-runnable-track,
+input[type=range]::-moz-range-track,
+input[type=range]::-ms-track {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 40px;
+	color: transparent;
+	background: lightgray;
+	border-radius: 999px;
+	border: none;
+}
+
+input[type=range]::-ms-fill-lower,
+input[type=range]::-ms-fill-upper {
+	display: none;
+}
+
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb,
+input[type=range]::-ms-thumb {
+	-webkit-appearance: none;
+	height: 40px;
+	width: 40px;
+	border-radius: 30px;
+	background: black;
+	box-shadow: 0px 2px 10px -2px black(1);
+}
+
+.video-wrapper {
+	.btn-play {
+		width: 64px;
+		height: 64px;
+		padding: 0 0 0 5px;
+		z-index: 1;
+	}
+
+	.fe-play {
+		font-size: 24px;
+	}
+
+	img {
+		transition: all .3s;
+	}
+
+	&:hover img {
+		opacity: .8;
+	}
+}
+
+.strikethrough {
+	position: relative;
+
+	&:before {
+		position: absolute;
+    content: "";
+    height: 5px;
+    width: 120px;
+    transform: rotate(-20deg);
+    background: $danger;
+    top: 30px;
+    left: 20%;
+	}
+}
+
+
+//== Checkout
+//
+//##
+
+#edd_checkout_wrap {
+	fieldset {
+		border: 0 !important;
+		background: none !important;
+		padding: 0;
+    // min-width: 0;
+    // padding: 0;
+    margin: 0;
+	}
+
+	legend {
+		//font-family: $headings-font-family;
+		font-size: $h3-font-size;
+		border-bottom: 1px solid $gray-200 !important;
+		padding: $spacer 0 !important;
+		// margin-bottom: $spacer;
+	}
+
+	.edd-input {
+		@extend .form-control;
+		width: 100% !important;
+		border-color: $gray-500;
+		padding-left: $spacer !important;
+		padding-right: $spacer !important;
+		margin-bottom: $spacer;
+	}
+
+	input[type=radio] {
+		top: -1px;
+		position: relative;
+		margin-right: 8px;
+	}
+
+	.edd-label {
+		color: $gray-900;
+	}
+
+	#edd-payment-mode-wrap {
+		color: $gray-900;
+	}
+
+	.edd-description {
+		color: $gray-600 !important;
+	}
+
+	@include media-breakpoint-up(md) {
+		.edd-label {
+			float: left;
+		}
+
+		.edd-description {
+			float: right;
+		}
+	}
+
+	#edd_secure_site_wrapper {
+		@extend .d-block;
+		@extend .px-4;
+		@extend .py-3;
+		@extend .rounded;
+		@extend .mb-5;
+		@extend .badge-success-soft;
+	}
+
+	.card-expiration .edd-label,
+	.card-expiration .edd-description {
+		float: none !important;
+	}
+
+	#edd_final_total_wrap {
+		border: 1px solid $gray-200;
+		background: $gray-100;
+		padding: $spacer / 2 $spacer !important;
+		color: $primary;
+		text-align: center;
+		border-radius: $border-radius;
+		margin: $spacer 0 $spacer * 2;
+	}
+
+	.edd_clearfix:after {
+		height: 0;
+	}
+
+	.edd-submit {
+		@extend .btn;
+		@extend .btn-block;
+		@extend .btn-primary;
+	}
+}
+
+#edd_purchase_receipt_products,
+#edd_purchase_receipt {
+	th, td {
+		padding: 1rem 1.5rem;
+	}
+}
+
+// .edd_empty_cart {
+// 	background: $white;
+// 	border-radius: 3px;
+// 	display: block;
+// 	min-height: $spacer * 5;
+// 	text-align: center;
+// 	padding: $spacer;
+// 	margin-bottom: $spacer;
+// 	line-height: $spacer * 5;
+// }
+
+// #edd_checkout_cart {
+// 	margin-bottom: $spacer * 1.5;
+// }
+
+// #edd_discount_code {
+// 	margin-top: -$spacer * 1.5;
+// 	background: $gray-100;
+// 	border: 1px solid $gray-200;
+// 	border-top: none;
+// 	margin-bottom: $spacer * 1.5;
+// 	padding: 12px;
+
+// 	#edd_show_discount {
+// 		margin-bottom: 0;
+// 	}
+
+// 	#edd-discount-code-wrap {
+// 		margin-bottom: 0;
+// 	}
+
+// 	.edd-discount-code-field-wrap {
+// 		@extend .clearfix;
+// 	}
+
+// 	#edd-discount {
+// 		width: auto !important;
+// 		float: left;
+// 		margin-right: 12px;
+// 	}
+
+// 	.edd-apply-discount {
+// 		width: auto;
+// 	}
+
+// 	.edd_error {
+// 		display: block;
+// 		margin-top: 10px;
+// 	}
+// }
+
+// #edd_final_total_wrap {
+// 	text-align: left;
+// }
+
+// #edd_payment_mode_select_wrap {
+// 	margin-bottom: $spacer * 1.5;
+
+// 	#edd-payment-mode-wrap label span {
+// 		display: inline-block;
+// 		width: 32px;
+// 		height: 20px;
+// 		text-indent: -9999px;
+// 		background: url(../img/test-payment.png) no-repeat;
+// 		float: right;
+// 		margin: 3px 30px 3px 10px;
+// 	}
+
+// 	#edd-payment-mode-wrap #edd-gateway-option-paypal span {
+// 		background-image: url(../img/paypal.png);
+// 	}
+
+// 	#edd-payment-mode-wrap #edd-gateway-option-stripe span {
+// 		background-image: url(../img/stripe.png);
+// 		width: 197px;
+// 	}
+
+// 	#edd-payment-mode-wrap #edd-gateway-option-wallet span {
+// 		text-indent: 0;
+// 		margin-top: 0;
+// 		margin-bottom: 0;
+// 		width: auto;
+// 		background: none;
+// 	}
+// }
+
+// #edd_cc_fields {
+// 	margin-top: $spacer;
+// }
+
+// #edd_purchase_submit {
+// 	margin-top: $spacer;
+// 	padding-top: $spacer;
+// 	border-top: 1px solid $gray-200;
+// 	text-align: center;
+// }
+
+.device-macbook::before,
+.device-macbook > .device-screen {
+	top: 11.5%;
+	left: 13.4%;
+	width: 73.6%;
+	height: 73.2%;
+}

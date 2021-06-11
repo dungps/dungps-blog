@@ -1,0 +1,12 @@
+.overlay {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: transparent;
+  background-image: linear-gradient(160deg, #50567D 0%, #332D0D 100%);
+  opacity: .41;
+  transition: background .3s, border-radius .3s, opacity .3s;
+  filter: brightness(100%) contrast(127%) saturate(122%) blur(0px) hue-rotate(0deg);
+}

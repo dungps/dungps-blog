@@ -1,11 +1,16 @@
-import { ElementType } from "react"
+import React from 'react';
 
-interface IRoute {
+export interface IRoute {
+    [key: string]: any
+
     path: string
-    component: ElementType
-    exact?: boolean
+    component?: React.ElementType
     redirect?: string
-    layout?: ElementType
+    exact?: boolean
+    isPublicRoute?: boolean
+    layout?: React.ElementType
+    children?: Array<IRoute>
+    helmet?: {
+        title: string | Function
+    }
 }
-
-export default IRoute

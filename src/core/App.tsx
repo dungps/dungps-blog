@@ -1,26 +1,27 @@
-import { History } from "history"
-import AppRouter from "../routers/AppRouter"
-import { AppConsumer } from "../context"
-import { Spinner } from "../components"
+import React, { useContext } from 'react';
+import AppRouter from 'routers';
+import { AppContext } from './context/context';
+import { Spinner } from '../components';
+import { Page404Component } from '../views';
 
-interface Props {
-    history: History
-}
+const App = () => {
+    const { state } = useContext(AppContext);
 
-const App = ({ history }: Props) => {
-    return (
-        <AppConsumer>
-            {context => {
-                return context.bootstrap.loading ? <Spinner style={{
-                    height: "100vh",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }} /> : <AppRouter history={history} />
-            }}
-        </AppConsumer>
-    )
-}
+    if (state.error.isError) {
+        return <Page404Component />
+    }
 
-export default App
+    if (state.bootstrap.loading) {
+        return <Spinner style={{
+            height: '100vh',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }} />;
+    }
+
+    return <AppRouter />;
+};
+
+export default App;
