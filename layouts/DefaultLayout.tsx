@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBars, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { NavLink } from '../components';
-import { NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 
 const menus = [
@@ -37,6 +36,7 @@ const socialLinks = [
 
 interface Props {
     title?: string
+    spotify?: string | null
 }
 
 const BrandLink = React.forwardRef<any, any>(({ children, ...rest }: any, ref: any) => {
@@ -47,7 +47,7 @@ const BrandLink = React.forwardRef<any, any>(({ children, ...rest }: any, ref: a
     );
 });
 
-const DefaultLayout = ({ children, title = 'Kevin Pham' }: PropsWithChildren<Props>) => {
+const DefaultLayout = ({ children, title = 'Kevin Pham', spotify }: PropsWithChildren<Props>) => {
     const [show, setShow] = useState<boolean>(false);
 
     const router = useRouter();
@@ -139,11 +139,6 @@ const DefaultLayout = ({ children, title = 'Kevin Pham' }: PropsWithChildren<Pro
             </footer>
         </>
     );
-};
-
-DefaultLayout.getInitialProps = async (ctx: NextPageContext) => {
-    console.log(ctx);
-    return {};
 };
 
 export default DefaultLayout;
