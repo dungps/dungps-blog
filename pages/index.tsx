@@ -2,7 +2,6 @@ import styles from '../styles/modules/Home.module.css';
 import DefaultLayout from '../layouts/DefaultLayout';
 
 export default function Home(props: any) {
-    console.log(props)
     return (
         <DefaultLayout>
             <section

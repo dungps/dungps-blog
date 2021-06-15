@@ -1,12 +1,17 @@
-import { useRouter } from 'next/router';
 import DefaultLayout from '../../../layouts/DefaultLayout';
 import { NextPageContext } from 'next';
 import Link from 'next/link';
 import marked from 'marked';
+import Error from 'next/error';
 
-const Post = ({ post }: any) => {
+const Post = ({ post, err }: any) => {
+
+    if (err) {
+        return <Error statusCode={err.statusCode} />;
+    }
+
     return (
-        <DefaultLayout>
+        <DefaultLayout title={`${post?.title} - Kevin Pham`}>
             <section className='bg-gray-200 py-8'>
                 <div className='container'>
                     <section className='pt-8 pt-md-11'>
@@ -47,7 +52,11 @@ Post.getInitialProps = async (context: NextPageContext) => {
     const domain = isDev ? 'http://localhost:3000' : 'https://www.dungps.com';
     const res = await fetch(`${domain}/api/post?slug=${slug}`);
     const content = await res.json();
-    console.log(content);
+
+    if (!content.success) {
+        return { err: { statusCode: 404 } };
+    }
+
     return { post: content.data, pagination: content.pagination };
 };
 
