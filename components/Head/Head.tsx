@@ -9,7 +9,7 @@ const Head = ({ title }: Props) => {
     return (
         <CoreHead>
             <meta charSet='utf-8' />
-            <link rel='icon' type='image/jpeg' href='/favicon.jpeg' />
+            <link rel='icon' type='image/jpeg' href='/image.jpeg' />
             <meta name='viewport' content='width=device-width, initial-scale=1' />
             <meta
                 name='description'
@@ -22,7 +22,7 @@ const Head = ({ title }: Props) => {
             <meta property='og:description' content="A Kevin's website" />
             <meta
                 property='og:image'
-                content='https://www.dungps.com/og-img.jpg'
+                content='https://www.dungps.com/image.jpg'
             />
             <meta property='og:site_name' content='Kevin Pham' />
         </CoreHead>
