@@ -24,6 +24,7 @@ const Head = ({ title }: Props) => {
                 property='og:image'
                 content='https://www.dungps.com/image.jpeg'
             />
+            <meta property='og:title' content={title} />
             <meta property='og:site_name' content='Kevin Pham' />
         </CoreHead>
     );
