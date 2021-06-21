@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import githubRequest from '../../utils/request/GithubRequest';
 
 const {
     GITHUB_OWNER = '',
     GITHUB_REPO = '',
-    GITHUB_API_URL = 'https://api.github.com',
-    GITHUB_ACCESS_TOKEN = '',
 } = process.env;
 
 interface GithubResponse {
@@ -22,21 +21,14 @@ interface Response {
 
 export default async (req: NextApiRequest, res: NextApiResponse<Response>) => {
     try {
-        const response = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/bootstrap.json`, {
-            headers: {
-                Authorization: `token ${GITHUB_ACCESS_TOKEN}`,
-                Accept: `application/vnd.github.v3+json`,
-            },
-        });
+        const response = await githubRequest.get<GithubResponse>(`/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/bootstrap.json`);
 
-        const data: GithubResponse = await response.json();
-
-        const convertData = Buffer.from(data.content, 'base64').toString('ascii');
+        const convertData = Buffer.from(response.data.content, 'base64').toString('ascii');
 
         return res.status(200).json({
             success: true,
-            data: JSON.parse(convertData)
-        })
+            data: JSON.parse(convertData),
+        });
     } catch (e) {
         return res.status(500).json({
             success: false,

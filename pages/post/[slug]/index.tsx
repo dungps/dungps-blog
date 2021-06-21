@@ -1,8 +1,9 @@
 import DefaultLayout from '../../../layouts/DefaultLayout';
-import { NextPageContext } from 'next';
+import React, { NextPageContext } from 'next';
 import Link from 'next/link';
 import marked from 'marked';
 import Error from 'next/error';
+import { getPosts } from '../../../apis/post';
 
 const Post = ({ post, err }: any) => {
 
@@ -47,17 +48,14 @@ const Post = ({ post, err }: any) => {
 };
 
 Post.getInitialProps = async (context: NextPageContext) => {
-    const isDev = process.env.NODE_ENV !== 'production';
     const { slug } = context.query;
-    const domain = isDev ? 'http://localhost:3000' : 'https://www.dungps.com';
-    const res = await fetch(`${domain}/api/post?slug=${slug}`);
-    const content = await res.json();
+    const res = await getPosts({ slug: slug as string });
 
-    if (!content.success) {
+    if (!res.data.success) {
         return { err: { statusCode: 404 } };
     }
 
-    return { post: content.data, pagination: content.pagination };
+    return { post: res.data.data, pagination: res.data.pagination };
 };
 
 export default Post;

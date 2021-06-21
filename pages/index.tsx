@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '../styles/modules/Home.module.css';
 import DefaultLayout from '../layouts/DefaultLayout';
 
@@ -8,8 +9,8 @@ export default function Home(props: any) {
                 className='fw-main-row pt-7 pb-9 pt-md-12 pb-14 pb-md-15 bg-dark text-center text-white position-relative'
                 style={{
                     backgroundImage: `url(/bg-img.jpg)`,
-                    backgroundPosition: "top center",
-                    backgroundSize: 'cover'
+                    backgroundPosition: 'top center',
+                    backgroundSize: 'cover',
                 }}
             >
                 <div className={styles.overlay} />

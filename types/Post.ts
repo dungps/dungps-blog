@@ -1,7 +1,7 @@
 export interface Post {
     title: string
     slug: string
-    category: string
+    category: Category
     tags: Array<string>
     feature_image: string
     content?: string
@@ -13,6 +13,11 @@ export interface Pagination {
     limit: number
     total_items: number
     total_page: number
+}
+
+export interface Category {
+    slug: string
+    label: string
 }
 
 export interface PostQuery {

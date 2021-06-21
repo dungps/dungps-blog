@@ -1,9 +1,9 @@
+import React from 'react';
 import '../styles/app.scss';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
 import { Spotify } from '../components';
-
-const idDev: boolean = process.env.NODE_ENV !== 'production';
+import { getBootstrap } from '../apis/bootstrap';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -17,12 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
     const appProps = await App.getInitialProps(appContext);
 
-    const url = idDev ? 'http://localhost:3000' : 'https://www.dungps.com';
+    const res = await getBootstrap();
 
-    const res = await fetch(`${url}/api/bootstrap`);
-    const data = await res.json();
-
-    appProps.pageProps['bootstrap'] = data.data;
+    appProps.pageProps['bootstrap'] = res.data.data;
 
     return { ...appProps };
 };

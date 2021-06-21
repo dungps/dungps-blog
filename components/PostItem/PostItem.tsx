@@ -23,7 +23,7 @@ const Item = ({ post }: Props) => {
                 <div className='card-meta mt-auto'>
                     <hr className='card-meta-divider' />
                     <div className='small'>
-                        <Link href={`/category/${post.category}`}>{post.category.toUpperCase()}</Link>
+                        <Link href={`/category/${post.category.slug}`}>{post.category.label.toUpperCase()}</Link>
                     </div>
                 </div>
             </article>

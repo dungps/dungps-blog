@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Pagination, Post } from '../../types/Post';
+import githubRequest from '../../utils/request/GithubRequest';
 
 const {
     GITHUB_OWNER = '',
     GITHUB_REPO = '',
-    GITHUB_API_URL = 'https://api.github.com',
-    GITHUB_ACCESS_TOKEN = '',
 } = process.env;
 
 interface GithubResponse {
@@ -26,19 +25,12 @@ export default async (req: NextApiRequest, res: NextApiResponse<Response>) => {
     const { slug, category, tag, limit = '10', page = '1', s } = req.query;
 
     try {
-        const response = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/posts.json`, {
-            headers: {
-                Authorization: `token ${GITHUB_ACCESS_TOKEN}`,
-                Accept: `application/vnd.github.v3+json`,
-            },
-        });
+        const response = await githubRequest.get<GithubResponse>(`/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/posts.json`);
 
-        const data: GithubResponse = await response.json();
-
-        let convertData = JSON.parse(Buffer.from(data.content, 'base64').toString('ascii'));
+        let convertData = JSON.parse(Buffer.from(response.data.content, 'base64').toString('ascii'));
 
         if (category && category.length) {
-            convertData = convertData.filter((o: Post) => o.category === category);
+            convertData = convertData.filter((o: Post) => o.category.slug === category);
         }
 
         if (tag && tag.length) {
@@ -49,14 +41,8 @@ export default async (req: NextApiRequest, res: NextApiResponse<Response>) => {
             const index = convertData.findIndex((o: Post) => o.slug === slug);
 
             if (index > -1 && convertData[index] && convertData[index].link) {
-                const postRes = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${convertData[index].link}`, {
-                    headers: {
-                        Authorization: `token ${GITHUB_ACCESS_TOKEN}`,
-                        Accept: `application/vnd.github.v3+json`,
-                    },
-                });
-                const content = await postRes.json();
-                convertData[index].content = Buffer.from(content.content, 'base64').toString('ascii');
+                const postRes = await githubRequest.get<GithubResponse>(`/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${convertData[index].link}`);
+                convertData[index].content = Buffer.from(postRes.data.content, 'base64').toString('ascii');
                 return res.status(200).json({
                     success: true,
                     data: convertData[index],
