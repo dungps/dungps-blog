@@ -7,7 +7,11 @@ interface Props {
 
 const PageHeader = ({ title, wrapperStyle }: Props) => {
     return (
-        <section className='bg-dark text-center text-white pt-8 pb-10' style={wrapperStyle}>
+        <section className='bg-dark text-center text-white pt-8 pb-10' style={{
+            background: 'url(/shape.svg) no-repeat center -80px',
+            backgroundSize: 1840,
+            ...wrapperStyle,
+        }}>
             <div className='container'>
                 <h1 className='display-3 font-weight-bold mb-0'>{title}</h1>
             </div>
