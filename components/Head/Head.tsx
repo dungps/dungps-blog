@@ -22,7 +22,7 @@ const Head = ({ title }: Props) => {
             <meta property='og:description' content="A Kevin's website" />
             <meta
                 property='og:image'
-                content='https://www.dungps.com/image.jpg'
+                content='https://www.dungps.com/image.jpeg'
             />
             <meta property='og:site_name' content='Kevin Pham' />
         </CoreHead>
