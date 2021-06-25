@@ -27,7 +27,7 @@ const Spotify = ({ spotify }: Props) => {
             <div style={{ display: show ? 'block' : 'none' }} className={style.spotifyBox}>
                 <div>
                     <iframe src={spotify} frameBorder='0' width={300} height={400}
-                            title='Spotify' />
+                            title='Spotify' allow='encrypted-media' />
                 </div>
             </div>
         </>
