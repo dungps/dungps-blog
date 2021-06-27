@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import githubRequest from '../../utils/request/GithubRequest';
+import githubRequest from '../../src/core/utils/request/GithubRequest';
 
 const {
     GITHUB_OWNER = '',

@@ -1,9 +1,15 @@
 import React, { NextPageContext } from 'next';
-import BlogLayout from '../../../layouts/BlogLayout';
-import { getPosts } from '../../../apis/post';
+import { getPosts } from '@core/apis/post';
+import { pages, BlogPage } from '@theme'
 
-const Category = ({ posts, pagination, category }: any) => {
-    return <BlogLayout title={`${category} - Kevin Pham`} posts={posts} pagination={pagination} />;
+const Category = ({ pageIndex, category, ...rest }: any) => {
+    if (pageIndex === -1) {
+        return <BlogPage {...rest} title={`Category: ${category}`} />
+    }
+
+    const { component: Component } = pages[pageIndex]
+
+    return <Component {...rest} />
 };
 
 Category.getInitialProps = async (context: NextPageContext) => {
@@ -12,7 +18,18 @@ Category.getInitialProps = async (context: NextPageContext) => {
     const posts = Array.isArray(res.data.data) ? res.data.data : [];
     const pagination = res.data.pagination ? res.data.pagination : null;
     const category = posts.length ? posts[0].category.label : slug;
-    return { posts, pagination, category };
+    let props = {}
+
+    const pageIndex = pages.findIndex((o) => o.slug === slug && o.category)
+
+    if (pageIndex > -1) {
+        const pageComponent = pages[pageIndex]
+        if (typeof pageComponent.component.getInitialProps === 'function') {
+            props = pageComponent.component.getInitialProps(context)
+        }
+    }
+
+    return { posts, pagination, category, pageIndex, ...props };
 };
 
 export default Category;

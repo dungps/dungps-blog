@@ -2,12 +2,13 @@ import React from 'react';
 import '../styles/app.scss';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import { Spotify } from '../components';
-import { getBootstrap } from '../apis/bootstrap';
+import { getBootstrap } from '@core/apis/bootstrap';
+import { ProgressBar, Spotify } from '@core/components';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
+            <ProgressBar />
             <Component {...pageProps} />
             <Spotify spotify={pageProps.bootstrap.spotify} />
         </>

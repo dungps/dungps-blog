@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Pagination, Post } from '../../types/Post';
-import githubRequest from '../../utils/request/GithubRequest';
+import { Pagination, Post } from '../../src/core/types/Post';
+import githubRequest from '../../src/core/utils/request/GithubRequest';
 
 const {
     GITHUB_OWNER = '',
