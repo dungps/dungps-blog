@@ -1,50 +1,15 @@
-import DefaultLayout from '../../../layouts/DefaultLayout';
-import React, { NextPageContext } from 'next';
-import Link from 'next/link';
-import marked from 'marked';
+import React from 'react'
+import { NextPageContext } from 'next';
 import Error from 'next/error';
-import { getPosts } from '../../../apis/post';
+import { getPosts } from '@core/apis/post';
+import { SinglePage } from '@theme'
 
-const Post = ({ post, err }: any) => {
-
+const Post = ({ err, ...rest }: any) => {
     if (err) {
         return <Error statusCode={err.statusCode} />;
     }
 
-    return (
-        <DefaultLayout title={`${post?.title} - Kevin Pham`}>
-            <section className='bg-gray-200 py-8'>
-                <div className='container'>
-                    <section className='pt-8 pt-md-11'>
-                        <div className='container'>
-                            <div className='row justify-content-center'>
-                                <div className='col-12 col-md-10'>
-                                    <div className='small text-gray-600 text-center mb-4'>
-                                        <Link
-                                            href={`/category/${post?.category}`}>{post?.category.toUpperCase()}</Link>
-                                    </div>
-                                    <h1 className='display-4 my-0 text-center font-weight-bold'>{post?.title}</h1>
-                                </div>
-                            </div>
-                            <div className='row justify-content-center my-8'>
-                                <div className='col-12 col-md-10 col-lg-9 col-xl-8'>
-                                    <div className='entry-thumbnail'>
-                                        <img src={post?.feature_image} alt={post?.title} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='row justify-content-center'>
-                                <div className='col-12 col-md-10 col-lg-9 col-xl-8'>
-                                    <div className='entry-content'
-                                         dangerouslySetInnerHTML={{ __html: marked(post?.content || '', { gfm: true }) }} />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </section>
-        </DefaultLayout>
-    );
+    return <SinglePage {...rest} />
 };
 
 Post.getInitialProps = async (context: NextPageContext) => {
@@ -55,7 +20,12 @@ Post.getInitialProps = async (context: NextPageContext) => {
         return { err: { statusCode: 404 } };
     }
 
-    return { post: res.data.data, pagination: res.data.pagination };
+    let props = {}
+    if (typeof SinglePage.getInitialProps === 'function') {
+        props = SinglePage.getInitialProps(context)
+    }
+
+    return { post: res.data.data, ...props };
 };
 
 export default Post;
